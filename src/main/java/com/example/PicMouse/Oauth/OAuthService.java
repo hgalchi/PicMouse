@@ -67,9 +67,6 @@ public class OAuthService {
                 String user_id = googleUser.getEmail();
                 System.out.println(user_id);
 
-                // 현재 서버에 user가 존재하지 않는다라고 가정하고 jwtToken을 발급산다.
-               /* String jwtToken=jwtService.createJwt(user_nu);
-                GetSocialOAuthRes getSocialOAuthRes=new GetSocialOAuthRes((jwtToken,user_num,oAuthToken.getAcc))*/
 
                 break;
             }

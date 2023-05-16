@@ -19,18 +19,24 @@ public class User {
     private String username;
 
     private String email;
+    private String provider;
+    private String providerId;
 
-    @Enumerated(EnumType.STRING)
+    /*@Enumerated(EnumType.STRING)
     @Column(nullable = true)
-    private Role role;
+    private Role role;*/
+
+    private String token;
 
 
 
     @Builder
-    public User(String name, String email, Role role) {
+    public User(String name, String email, Role role,String provider,String providerId) {
         this.username=name;
         this.email=email;
-        this.role=role;
+        //this.role=role;
+        this.provider = provider;
+        this.providerId = providerId;
     }
 
 
