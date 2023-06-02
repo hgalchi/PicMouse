@@ -1,12 +1,15 @@
 package com.example.PicMouse.Oauth;
 
+import com.example.PicMouse.Entity.User;
 import com.example.PicMouse.Enum.Constant;
+import com.example.PicMouse.Repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 @Service
@@ -15,6 +18,8 @@ public class OAuthService {
 
     private final GoogleOAuth googleOAuth;
     private final HttpServletResponse res;
+
+    private final UserRepository userRepository;
 
     public void request(Constant.SocialLoginType socialLoginType) throws IOException {
         String redirectURL;
@@ -41,7 +46,6 @@ public class OAuthService {
                 ResponseEntity<String> userInfoResponse=googleOAuth.requestUserInfo(oAuthToken);
                 //다시 JSON 형식의 응답 객체를 자바 객체로 역직렬화한다.
                 GoogleUser googleUser= googleOAuth.getUserInfo(userInfoResponse);
-                System.out.println(googleUser.getId());
             }
             default:{
                 throw new IllegalArgumentException("oAuthRes ");
@@ -64,8 +68,14 @@ public class OAuthService {
                 //다시 Json형식의 응답객체를 자바 객체로 역직렬화한다.
                 googleUser = googleOAuth.getUserInfo(userInfoResponse);
 
-                String user_id = googleUser.getEmail();
-                System.out.println(user_id);
+                //db에 user객체 저장
+                /*User user=User.builder()
+                        .email(googleUser.getEmail())
+                        .name(googleUser.getName())
+                        .picture(googleUser.getPicture())
+                        .token(oAuthToken.getAccess_token())
+                        .build();*/
+
 
 
                 break;

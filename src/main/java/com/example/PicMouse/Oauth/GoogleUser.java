@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GoogleUser {
-    public String id;
+   // public String id;
     public String email;
     public String name;
     public String picture;

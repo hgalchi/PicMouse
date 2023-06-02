@@ -4,41 +4,46 @@ import com.example.PicMouse.Enum.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
-public class User {
-
+public class User{
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    @Column(nullable = false)
+    private String name;
 
+    @Column(nullable = false)
     private String email;
-    private String provider;
-    private String providerId;
 
-    /*@Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    private Role role;*/
+    @Column
+    private String picture;
 
-    private String token;
-
-
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @Builder
-    public User(String name, String email, Role role,String provider,String providerId) {
-        this.username=name;
-        this.email=email;
-        //this.role=role;
-        this.provider = provider;
-        this.providerId = providerId;
+    public User(String name, String email, String picture, Role role) {
+        this.name = name;
+        this.email = email;
+        this.picture = picture;
+        this.role = role;
     }
 
+    public User update(String name, String picture) {
+        this.name = name;
+        this.picture = picture;
 
+        return this;
+    }
 
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
 }
