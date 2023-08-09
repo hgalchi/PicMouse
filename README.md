@@ -1,5 +1,4 @@
-# Capstone
-4학년 캡스톤 졸작
+picmouse
 
 ✨ :sparkles: feat : 새로운 기능
 🐛 :bug: fix : 버그
